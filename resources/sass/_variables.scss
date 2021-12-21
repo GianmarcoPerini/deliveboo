@@ -1,0 +1,74 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+// $font-family-sans-serif: 'Nunito', sans-serif;
+
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// palette
+$primC: #e64c42;
+$secC: #d8a741;
+$thirC: #414133;
+
+// buttons
+.prim-butt{
+    font-size: 1.2em;
+    padding: 10px 15px 10px 20px;
+    font-style: italic;
+    color: white;
+    background-color: $primC;
+    border: 1px solid $primC;
+    border-radius: 10px;
+    text-decoration: none;
+    &:hover{
+        color: $primC;
+        background-color: white;
+        border: 1px solid $primC;
+        text-decoration: none;
+    }    
+}
+
+.sec-butt{
+    font-size: 1.2em;
+    padding: 10px 15px 10px 20px;
+    font-style: italic;
+    color: white;
+    background-color: $secC;
+    border: 1px solid $secC;
+    border-radius: 10px;
+    text-decoration: none;
+    &:hover{
+        color: $secC;
+        background-color: white;
+        border: 1px solid $secC;
+        text-decoration: none;
+    }    
+}
+
+.white-butt{
+    font-size: 1.2em;
+    font-weight: 200;
+    font-style: italic;
+    padding: 10px 15px 10px 20px;
+    color: black;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.white-butt-hover{
+    font-size: 1.2em;
+    font-weight: 200;
+    font-style: italic;
+    padding: 10px 15px 10px 20px;
+    color: black;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    &:hover{
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+}
+

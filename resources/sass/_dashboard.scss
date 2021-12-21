@@ -1,0 +1,21 @@
+.dashboard-wrapper{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    background-color: white;
+    border-radius: 30px;
+    .container-dashboard{
+        .row{
+            .container-btn-name{
+                h2{
+                    font-size: 3em;
+                    font-weight: 700;
+                    font-style: italic;
+                }
+            }
+            .container-img{
+                img{
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+}
