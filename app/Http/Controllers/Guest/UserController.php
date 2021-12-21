@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function show(User $user){
-        $dishes = Dish::where('user_id', '=',$user->id)->get();
+        $dishes = Dish::where('user_id', '=', $user->id)->get();
         return view('guests.show', compact('user','dishes'));
     }
 }
