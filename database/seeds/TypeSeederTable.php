@@ -18,6 +18,7 @@ class TypeSeederTable extends Seeder
 
             $newType = new Type();
             $newType->name = $type;
+            $newType->isCheck = false;
             $newType->save();
         }
     }
