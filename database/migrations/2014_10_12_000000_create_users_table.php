@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('phone', 15)->unique();
             $table->text('image');
             $table->text('description')->nullable();
+            $table->string('open');
+            $table->string('close');
             $table->rememberToken();
             $table->timestamps();
         });

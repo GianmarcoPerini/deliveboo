@@ -2,7 +2,7 @@
 
 
 @section('content')
-        <app-component dato="informazione" ></app-component>
+        <app-component></app-component>
 @endsection
 
 @section('script')    

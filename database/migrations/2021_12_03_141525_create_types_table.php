@@ -17,6 +17,7 @@ class CreateTypesTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->boolean('isCheck');
+            $table->text('img');
             $table->timestamps();
         });
     }

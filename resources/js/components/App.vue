@@ -4,7 +4,8 @@
       <i class="fas fa-utensils mr-3"></i>
       <p class="m-0">Le cucine più richieste</p>
     </div>
-    <div>
+
+    <section class="input--checkbox">
       <div class="d-flex">
         <div v-for="type in types" :key="type.id">
           <input
@@ -16,96 +17,68 @@
             @click="(selected.page = 1), check(type), log(type)"
           />
           <label :for="`input${type.id}`">
-            <div :class="type.isCheck == 1 ? 'active' : ''" class="cat mr-2">
-              {{ type.name }}
+            <div class="cat mr-2">
+              <img
+                :class="type.isCheck == 1 ? 'active' : ''"
+                :src="type.img"
+                alt=""
+              />
+              <p>{{ type.name }}</p>
             </div>
           </label>
         </div>
       </div>
+    </section>
 
+    <section class="customer--search">
       <input
-        class="col-12 white-input"
+        class="col-12 input--search"
         placeholder="Cerca un ristorante"
         @keydown="selected.page = 1"
         type="text"
         v-model="selected.query"
       />
-    </div>
+    </section>
 
-    <div v-for="user in users" :key="user.id">
-      <p>{{ user.name }}</p>
-    </div>
-  </div>
-
-  <!-- <div class="col-lg-9 col-md-12 mt-3 d-flex flex-wrap">
-        <div v-for="type in types" :key="type.id" class="d-inline mx-2 input">
-          <input
-            class="check"
-            type="checkbox"
-            :id="`input${type.id}`"
-            :value="type.name"
-            v-model="selected.checked"
-            @click="selected.page = 1"
-          />
-          <label class="text-input" :for="`input${type.id}`">{{
-            type.name
-          }}</label>
-        </div>
-      </div>
-    </div> -->
-
-  <!-- <div class="row mt-5">
+    <section class="restaurant m-3">
       <div
-        class="col-lg-4 col-md-6 col-sm-12 mb-5 d-flex justify-content-center"
         v-for="user in users"
         :key="user.id"
+        class="d-flex m-4 restaurant--box"
       >
-        <div class="card" style="width: 18rem">
-          <img
-            :src="
-              user.image.startsWith('users/images')
-                ? 'http://127.0.0.1:8000/storage/' + user.image
-                : user.image
-            "
-            class="card-img-top"
-            :alt="user.image"
-          />
-          <div class="card-body">
-            <p>{{ user.name }}</p>
-            <p class="restaurant-descr">{{ user.description }}</p>
-            <a
-              :href="`/guest/user/${user.id}`"
-              class="btn white-butt white-butt-hover"
-              >Entra nel Menu del Ristorante</a
-            >
+        <div class="img--box">
+          <img :src="user.image" alt="" />
+        </div>
+        <div class="info ml-4" @click="log(user)">
+          <h4>
+            <a :href="`guest/user/${user.id}`">{{ user.name }}</a>
+          </h4>
+          <span v-for="type in user.types" :key="type.id" class="mr-1">{{
+            type.name
+          }}</span>
+        </div>
+        <div class="info ml-auto d-flex justify-content-center flex-column">
+          <div>
+            <i class="mr-3 fas fa-lock-open"></i>Orario di apertura:
+            {{ user.open }}
+          </div>
+          <div>
+            <i class="mr-3 fas fa-lock"></i>Orario di chiusura: {{ user.close }}
           </div>
         </div>
       </div>
-    </div> -->
+    </section>
 
-  <!-- <div class="row justify-content-center">
-      <button
-        class="btn white-butt mx-3"
-        v-if="currentPage > 1"
-        @click="previusPage"
-      >
-        prev
-      </button>
-
-      <button
-        class="btn white-butt mx-3"
-        v-if="currentPage < lastPage"
-        @click="nextPage"
-      >
-        next
-      </button>
-    </div> -->
+    <section class="d-flex justify-content-center">
+      <button class="mx-3" @click="previusPage">prev</button>
+      <button class="mx-3" @click="nextPage">next</button>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {
   name: "App",
-  props: ["dato"],
   data() {
     return {
       users: [], // array degli user
@@ -147,10 +120,10 @@ export default {
       axios.get("api/type").then((res) => (this.types = res.data));
     },
     nextPage() {
-      this.selected.page++;
+      if (this.currentPage < this.lastPage) this.selected.page++;
     },
     previusPage() {
-      this.selected.page--;
+      if (this.currentPage > 1) this.selected.page--;
     },
   },
 
@@ -175,60 +148,65 @@ export default {
 
 <style lang="scss" scoped>
 .cat {
-  width: 100px;
-  height: 100px;
-  background-color: yellow;
-  border-radius: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  border: 3px solid transparent;
+
+  img {
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+  }
 }
 
 .active {
-  border: 1px solid blue;
+  border: 3px solid blue !important;
 }
-// .text-input {
-//   color: white;
-//   font-size: 0.9rem;
-//   font-style: italic;
-//   // box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-// }
 
-// .white-input {
-//   font-size: 1.2em;
-//   font-weight: 200;
-//   font-style: italic;
-//   padding: 10px 15px 10px 20px;
-//   color: black;
-//   border-radius: 10px;
-//   text-decoration: none;
-//   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-// }
+button {
+  background-color: #ff8000;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  color: white;
 
-// .jambotron {
-//   width: 100%;
-//   background-image: url("https://www.destinationperth.com.au/sites/default/files/styles/og/public/2021-06/tonic-and-ginger-jumbotron.jpg?itok=plccaT1D");
-//   background-size: cover;
-//   background-position-x: center;
-//   background-repeat: no-repeat;
+  &:active {
+    box-shadow: 1px 1px 3px rgb(117, 117, 117);
+  }
+}
+h4 {
+  a {
+    text-decoration: none;
+    color: black;
 
-//   .my_img {
-//     min-height: 500px;
-//   }
-// }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
 
-// .card {
-//   border: 1px, solid, black;
+.input--search {
+  border-color: transparent;
+  box-shadow: 1px 2px 4px rgba(190, 190, 190, 0.74);
+  border-radius: 50px;
+  height: 3rem;
+}
+.restaurant--box {
+  background-color: #e7e7e7b9;
+  border-radius: 20px;
+  padding: 10px;
 
-//   p {
-//     font-size: 1.5em;
-//     font-style: italic;
-//     font-weight: 600;
-//   }
+  .img--box {
+    height: 100px;
+    width: 180px;
+    border-radius: 20px;
+    overflow: hidden;
 
-//   .restaurant-descr {
-//     font-size: 1rem;
-//     font-weight: 300;
-//   }
-// }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
 </style>
